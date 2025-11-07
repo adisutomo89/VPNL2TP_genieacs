@@ -22,6 +22,15 @@ if [ "$PPP_IFACE" = "ppp0" ]; then
     ip route add 12.5.89.0/24 dev ppp0 || true
 fi
 ```
+
+Mikrotik
+```bash
+/interface list
+add name=PPPOE comment="List untuk semua PPPoE client"
+
+/system scheduler
+add name=AutoPPPoEtoList interval=1m on-event="/interface list member remove [find list=PPPOE]; :foreach i in=[/interface find where type~\"pppoe\"] do={/interface list member add list=PPPOE interface=\$i}" comment="Otomatis masukkan semua PPPoE ke list"
+```
 sumber parameter : 
 https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main
 https://github.com/alijayanet/genieacs
