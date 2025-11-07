@@ -22,4 +22,6 @@ if [ "$PPP_IFACE" = "ppp0" ]; then
     ip route add 12.5.89.0/24 dev ppp0 || true
 fi
 ```
-sumber parameter : https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main
+sumber parameter : 
+https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main
+https://github.com/alijayanet/genieacs
