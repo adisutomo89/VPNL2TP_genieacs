@@ -21,6 +21,8 @@ sudo nano /etc/ppp/ip-up
 if [ "$PPP_IFACE" = "ppp0" ]; then
     ip route add 12.5.89.0/24 dev ppp0 || true
 fi
+
+sudo systemctl restart xl2tpd
 ```
 
 Mikrotik
@@ -38,5 +40,4 @@ add chain=srcnat src-address=192.168.42.0/24 out-interface-list=PPPOE action=mas
 /tool sniffer quick interface=genieacs ip-protocol=icmp
 ```
 sumber parameter : 
-https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main
-https://github.com/alijayanet/genieacs
+https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main || https://github.com/alijayanet/genieacs
