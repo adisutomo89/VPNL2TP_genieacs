@@ -30,6 +30,12 @@ add name=PPPOE comment="List untuk semua PPPoE client"
 
 /system scheduler
 add name=AutoPPPoEtoList interval=1m on-event="/interface list member remove [find list=PPPOE]; :foreach i in=[/interface find where type~\"pppoe\"] do={/interface list member add list=PPPOE interface=\$i}" comment="Otomatis masukkan semua PPPoE ke list"
+
+/ip firewall nat
+add chain=srcnat src-address=192.168.42.0/24 out-interface-list=PPPOE action=masquerade comment="Auto NAT untuk trafik L2TP ke semua PPPoE"
+
+#test
+/tool sniffer quick interface=genieacs ip-protocol=icmp
 ```
 sumber parameter : 
 https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main
