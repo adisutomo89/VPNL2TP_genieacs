@@ -14,6 +14,9 @@ Parameter genieacs
 cd parameter
 mongorestore --db genieacs --drop .
 systemctl restart genieacs-{cwmp,ui,nbi}
+
+#cek logs
+journalctl -f -u genieacs-cwmp
 ```
 ```bash
 sudo nano /etc/ppp/ip-up
@@ -49,6 +52,18 @@ Cek jika Status: inactive
 sudo ufw status verbose
 sudo ufw enable
 sudo ufw status
+
+# ijinkan port
+sudo ufw allow 3000/tcp
+sudo ufw allow 7547/tcp
+sudo ufw allow 22/tcp
+
+sudo systemctl restart genieacs-ui
+sudo systemctl status genieacs-ui
+
+#melihat logs
+sudo tail -f /var/log/genieacs/genieacs-cwmp-access.log
+
 ```
 sumber parameter : 
 https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main || https://github.com/alijayanet/genieacs
