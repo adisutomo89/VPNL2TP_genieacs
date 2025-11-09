@@ -39,5 +39,16 @@ add chain=srcnat src-address=192.168.42.0/24 out-interface-list=PPPOE action=mas
 #test
 /tool sniffer quick interface=genieacs ip-protocol=icmp
 ```
+OPSIONAL
+```bash
+Matikan port API public genieacs
+sudo ufw allow from 192.168.42.0/24 to any port 7557 proto tcp
+sudo ufw deny 7557/tcp
+
+Cek jika Status: inactive
+sudo ufw status verbose
+sudo ufw enable
+sudo ufw status
+```
 sumber parameter : 
 https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main || https://github.com/alijayanet/genieacs
