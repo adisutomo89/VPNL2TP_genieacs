@@ -42,24 +42,34 @@ add chain=srcnat src-address=192.168.42.0/24 out-interface-list=PPPOE action=mas
 #test
 /tool sniffer quick interface=genieacs ip-protocol=icmp
 ```
-OPSIONAL
+OPSIONAL FIREWALL
 ```bash
-Matikan port API public genieacs
-sudo ufw allow from 192.168.42.0/24 to any port 7557 proto tcp
-sudo ufw deny 7557/tcp
+# Hapus aturan lama (biar bersih)
+sudo ufw --force reset
 
-Cek jika Status: inactive
-sudo ufw status verbose
-sudo ufw enable
-sudo ufw status
+# Set default policy
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
 
-# ijinkan port
-sudo ufw allow 3000/tcp
-sudo ufw allow 7547/tcp
-sudo ufw allow 22/tcp
+# Allow SSH dari mana saja
+sudo ufw allow 22/tcp comment 'SSH remote access'
 
-sudo systemctl restart genieacs-ui
-sudo systemctl status genieacs-ui
+# Allow CWMP (CPE connect) dari mana saja
+sudo ufw allow 7547/tcp comment 'GenieACS CWMP'
+
+# Allow GUI dari mana saja
+sudo ufw allow 3000/tcp comment 'GenieACS Web GUI'
+
+# Allow NBI dan FileServer hanya dari jaringan lokal
+sudo ufw allow from 192.168.42.0/24 to any port 7557 proto tcp comment 'GenieACS NBI internal only'
+sudo ufw allow from 192.168.42.0/24 to any port 7567 proto tcp comment 'GenieACS FileServer internal only'
+
+# Aktifkan firewall
+sudo ufw --force enable
+
+# Lihat hasil
+sudo ufw status numbered
+
 
 #melihat logs
 sudo tail -f /var/log/genieacs/genieacs-cwmp-access.log
