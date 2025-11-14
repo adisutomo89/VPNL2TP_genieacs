@@ -69,9 +69,10 @@ sudo ufw --force enable
 
 # Lihat hasil
 sudo ufw status numbered
+```
 
-
-#melihat logs
+Mengatur logs
+```bash
 sudo tail -f /var/log/genieacs/genieacs-cwmp-access.log
 
 #logrotate
@@ -88,8 +89,6 @@ sudo nano /etc/logrotate.d/genieacs
 
 #cek
 sudo logrotate -f /etc/logrotate.d/genieacs
-
-
 ```
 sumber parameter : 
 https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main || https://github.com/alijayanet/genieacs
