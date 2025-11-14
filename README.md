@@ -83,7 +83,7 @@ sudo nano /etc/logrotate.d/genieacs
     compress
     missingok
     notifempty
-    create 644 root root
+    create 644 genieacs genieacs
 }
 
 #cek
