@@ -89,6 +89,10 @@ sudo nano /etc/logrotate.d/genieacs
 
 #cek
 sudo logrotate -f /etc/logrotate.d/genieacs
+
+#Backup
+mongodump --db genieacs --out /backup/genieacs-$(date +%F)
+
 ```
 sumber parameter : 
 https://github.com/safrinnetwork/GACS-Ubuntu-22.04/tree/main || https://github.com/alijayanet/genieacs
